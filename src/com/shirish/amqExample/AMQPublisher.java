@@ -10,6 +10,7 @@ import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -38,8 +39,9 @@ public class AMQPublisher {
 
     }
 
-    public void helloWorldProducer() {
+    public void helloWorldProducer(JMSMsgType msgType) {
 
+        JMSMessageFactory msgFactory = new JMSMessageFactory();
         Session session = null;
         Connection connection = null;
         try {
@@ -64,7 +66,8 @@ public class AMQPublisher {
                 String xmldata = testMarshall( EncodingTypes.UTF8.getType(), Integer.valueOf( i ) );
                 // Create a messages
                 //String text = "Hello world! From: " + Thread.currentThread().getName() + " : " + i;
-                TextMessage message = session.createTextMessage( xmldata );
+               // TextMessage message = session.createTextMessage( xmldata );
+                Message message = msgFactory.getMessage( xmldata, session, msgType );
 
                 // Tell the producer to send the message
                 System.out.println( "Sent message: " + message.hashCode() + " : " + Thread.currentThread().getName() + " i: " + i );

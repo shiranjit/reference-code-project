@@ -27,7 +27,7 @@ public class AMQPubApp {
         AMQPublisher sub = null;
         try {
             sub = new AMQPublisher();
-            sub.helloWorldProducer();
+            sub.helloWorldProducer(JMSMsgType.TextMsgType);
 
         }
         catch ( Exception e ) {
