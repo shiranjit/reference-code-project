@@ -1,5 +1,8 @@
 *.class
 
+[Bb]in
+[Tt]arget
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
