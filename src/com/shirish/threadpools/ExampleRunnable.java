@@ -1,5 +1,6 @@
 /**
- The MIT License (MIT)
+
+The MIT License (MIT)
 
 Copyright (c) 2015 Shirish Ranjit
 
@@ -19,47 +20,49 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+THE SOFTWARE. 
 
  */
-
-package com.shirish.syncExample;
+package com.shirish.threadpools;
 
 
 /**
- * @author shirish Ranjit
- * @since 7/9/2015
+ * @author shirish
+ * @Feb 28, 2016
+ *
  */
-public class ABuzRuleClass {
+public class ExampleRunnable implements Runnable {
 
+    private final String name;
     /**
      * 
      */
-    public ABuzRuleClass() {
+    public ExampleRunnable(String name) {
+        this.name = name;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
+    @Override
+    public void run() {
+        
+        try {
+            long sleeptime = (new Double( 1000 * Math.random() + 1000)).longValue();
+            System.out.println( "Running runnable: " + name  + " time: " + sleeptime);
+            
+            Thread.sleep(sleeptime);
+            
+        }
+        catch ( Exception e ) {
+            e.printStackTrace( );
+        }
 
     }
-    
-    /**
-     * Example of what is mean to be synchronizing an object vs method. This is also block synchronization vs method
-     * synchronization. 
-     * 
-     * @param sleepNum
-     * void
-     */
-    public void executeRule(Long sleepNum){
-        
-        //synchronized ( ABuzRuleClass.class ) {
-            try {
-                System.out.println("---- Sleeping --- for " +sleepNum.longValue() + " seconds");
-                Thread.sleep( sleepNum *1000 );
-            }
-            catch ( InterruptedException e ) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            
-            System.out.println(" done sleeping");
-        //}
+
+    public String getName() {
+
+        return name;
     }
 
 }
