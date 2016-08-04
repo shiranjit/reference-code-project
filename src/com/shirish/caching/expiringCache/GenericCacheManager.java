@@ -24,7 +24,7 @@
 
 
 
-package com.shirish.caching;
+package com.shirish.caching.expiringCache;
 
 import org.apache.log4j.Logger;
 
@@ -37,7 +37,7 @@ import org.apache.log4j.Logger;
  */
 public class GenericCacheManager extends CacheManager {
 
-    private static Logger              LOGGER        = Logger.getLogger( GenericCacheManager.class );
+    private static Logger              LOG        = Logger.getLogger( GenericCacheManager.class );
 
     //lets expire the broker cache in 4 hours.
     private static int                 minutesToLive = 240;
@@ -90,7 +90,7 @@ public class GenericCacheManager extends CacheManager {
         }
         catch ( Exception e ) {
             //e.printStackTrace();
-            LOGGER.error( "Exception in getting broker information from cache. "
+            LOG.error( "Exception in getting broker information from cache. "
                           + e.toString(), e );
             throw e;
         }
@@ -126,7 +126,7 @@ public class GenericCacheManager extends CacheManager {
         }
         catch ( Exception e ) {
             //e.printStackTrace();
-            LOGGER.error( "Exception in getting broker information from cache. "
+            LOG.error( "Exception in getting broker information from cache. "
                           + e.toString(), e );
             throw e;
         }

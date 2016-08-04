@@ -21,7 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.shirish.caching;
+package com.shirish.caching.expiringCache;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -47,6 +53,10 @@ public class TestCacheManager extends TestCase {
      * @see TestCase#setUp()
      */
     protected void setUp() throws Exception {
+        //BasicConfigurator.configure();
+        LoggerContext lcontext = (LoggerContext)LogManager.getContext();
+        Configuration lconfig = lcontext.getConfiguration();
+        lconfig.getRootLogger().setLevel( Level.DEBUG );
         caheManager = GenericCacheManager.getHandle();
     }
 
@@ -65,11 +75,12 @@ public class TestCacheManager extends TestCase {
     public void testGetCache() {
 
         try {
-            CachedObject value = new CachedObject("AUTX", "ABNA",20);
+            CachedObject value = new CachedObject("AUTX", "ABNA",200);
             caheManager.putInCache( "ABNA", value );
             for (int i = 0; i < 10; i++) {
                 CachedObject bvo = caheManager.getfromCache("ABNA");
-                System.out.println("This is the broker: " + bvo.toString());
+                System.out.println("This is the boject: " + bvo);
+                Thread.sleep( 1000 );
             }
 
         }

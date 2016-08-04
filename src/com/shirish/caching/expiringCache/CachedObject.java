@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.shirish.caching;
+package com.shirish.caching.expiringCache;
 
 import java.util.Calendar;
 
@@ -50,16 +50,16 @@ public class CachedObject implements Cacheable {
 	 * @param id
 	 * @param minutesToLive
 	 */
-	public CachedObject(Object obj, Object id, int minutesToLive) {
+	public CachedObject(Object obj, Object id, int milliscondsToLive) {
 		this.object = obj;
 		this.identifier = id;
 
 		// minutesToLive of 0 means it lives onindefinitely.
-		if (minutesToLive != 0) {
+		if (milliscondsToLive != 0) {
 			dateofExpiration = new java.util.Date();
 			java.util.Calendar cal = java.util.Calendar.getInstance();
 			cal.setTime(dateofExpiration);
-			cal.add(Calendar.MINUTE, minutesToLive);
+			cal.add(Calendar.MILLISECOND, milliscondsToLive);
 			dateofExpiration = cal.getTime();
 		}
 	}

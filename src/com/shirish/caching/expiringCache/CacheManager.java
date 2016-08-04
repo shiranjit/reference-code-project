@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.shirish.caching;
+package com.shirish.caching.expiringCache;
 
 import java.util.Collections;
 import org.apache.log4j.Logger;
@@ -46,6 +46,7 @@ public abstract class CacheManager {
 	public CacheManager() {
 		try {
 
+		    System.out.println( "this is c-manager" );
 			/* Create background thread, which will be responsible for 
 			 * purging expired items. 
 			 */
@@ -53,7 +54,7 @@ public abstract class CacheManager {
 				/*  The default time the thread should sleep between scans.  The sleep 
 				 *  method takes in a millisecond value so 5000 = 5 Seconds.
 				 */
-				int milliSecondSleepTime = 500000;
+				int milliSecondSleepTime = 100;
 
 				public void run() {
 					try {
@@ -61,6 +62,7 @@ public abstract class CacheManager {
 						 * looping forever.
 						 */
 						while (true) {
+						    System.out.println( "while this is c-manager" );
 							LOGGER.info(
 								"ThreadCleanerUpper Scanning ForExpired Objects...");
 
@@ -125,7 +127,7 @@ public abstract class CacheManager {
 			/* End class definition and close new thread definition */
 
 			// Sets the thread's priority to the minimum value.
-			threadCleanerUpper.setPriority(Thread.MIN_PRIORITY);
+			threadCleanerUpper.setPriority(Thread.MAX_PRIORITY);
 
 			// Starts the thread.
 			threadCleanerUpper.start();
