@@ -30,27 +30,29 @@ import org.apache.log4j.Logger;
 
 /**
  * 
- * This is for broker cache manager.
+ * This is for expiring cache manager.
  * 
  * @author SRANJIT
  * 
  */
 public class GenericCacheManager extends CacheManager {
 
-    private static Logger              LOG        = Logger.getLogger( GenericCacheManager.class );
+    private static Logger              LOG                  = Logger.getLogger( GenericCacheManager.class );
 
-    //lets expire the broker cache in 4 hours.
-    private static int                 minutesToLive = 240;
+    //lets expire the cache in  milliseconds
+    private static int                 millisecondsToLive = 240;
 
-    private static GenericCacheManager handle        = null;
+    private static GenericCacheManager handle               = null;
 
 
     /**
      * Private constructor that calls the constructor in the supper class.
      *
      */
-    private GenericCacheManager() {
-        super();
+    private GenericCacheManager(
+                                int milliSecondSweepTimeIn, int millisecondsToLiveIn) {
+        super( milliSecondSweepTimeIn );
+        millisecondsToLive = millisecondsToLiveIn;
     }
 
     /**
@@ -64,7 +66,7 @@ public class GenericCacheManager extends CacheManager {
     public static synchronized GenericCacheManager getHandle() {
 
         if ( handle == null ) {
-            return handle = new GenericCacheManager();
+            return handle = new GenericCacheManager(3000, 200);
         }
         else {
             return handle;
@@ -72,13 +74,13 @@ public class GenericCacheManager extends CacheManager {
     }
 
     /**
-     * This method allows to find broker with CriteriaVO. The broker information
-     * is cached by key.
+     * This method allows to find data in cached by key.
      * 
      * @param key
      * @return
      */
-    public synchronized CachedObject getfromCache(String key ) throws Exception
+    public synchronized CachedObject getfromCache(
+                                                   String key ) throws Exception
     {
 
 
@@ -89,22 +91,21 @@ public class GenericCacheManager extends CacheManager {
 
         }
         catch ( Exception e ) {
-            //e.printStackTrace();
-            LOG.error( "Exception in getting broker information from cache. "
-                          + e.toString(), e );
+            LOG.warn( "Exception in getting information from cache. "
+                       + e.getMessage(), e );
             throw e;
         }
 
     }
 
     /**
-     * This method allows to find broker with CriteriaVO. The broker information
-     * is cached by key.
+     * This method allows to find  information is cached by key.
      * 
      * @param key
      * @return
      */
-    public synchronized CachedObject putInCache(String key, CachedObject value ) throws Exception
+    public synchronized Object putInCache(
+                                                 String key, CachedObject value ) throws Exception
     {
 
         CachedObject cacheobject = (CachedObject) this.getCache( key );
@@ -112,9 +113,9 @@ public class GenericCacheManager extends CacheManager {
         try {
             if ( cacheobject == null ) {
 
-                cacheobject = new CachedObject( value, key, minutesToLive );
+                cacheobject = new CachedObject( value, key, millisecondsToLive );
                 this.putCache( cacheobject );
-                return cacheobject;
+                return cacheobject.getObject();
 
             }
             else {
@@ -126,8 +127,8 @@ public class GenericCacheManager extends CacheManager {
         }
         catch ( Exception e ) {
             //e.printStackTrace();
-            LOG.error( "Exception in getting broker information from cache. "
-                          + e.toString(), e );
+            LOG.error( "Exception in getting cache information from cache. "
+                       + e.toString(), e );
             throw e;
         }
 

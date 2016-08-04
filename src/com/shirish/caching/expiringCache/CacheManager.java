@@ -24,6 +24,11 @@
 package com.shirish.caching.expiringCache;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -35,18 +40,22 @@ import org.apache.log4j.Logger;
  */
 public abstract class CacheManager {
     private static Logger LOGGER = Logger.getLogger(CacheManager.class);
-	
+	private static int milliSecondSweepTime = 300000;
 	/* This is the HashMap that contains all objects in the cache. */
-	private java.util.Map cacheHashMap = Collections.synchronizedMap(new java.util.HashMap());
+	private Map <Object, Cacheable> cacheHashMap = Collections.synchronizedMap(new HashMap <Object, Cacheable>());
 
 
 	/* This object acts as a semaphore, which protects the HashMap */
 	 //private static Object lock = new Object(); 
 
-	public CacheManager() {
+	public CacheManager(int milliSecondSweepTimeIn) {
 		try {
 
-		    System.out.println( "this is c-manager" );
+		    milliSecondSweepTime =  milliSecondSweepTimeIn;
+		    if(milliSecondSweepTime <=0){
+		        //default to 15 min
+		        milliSecondSweepTime = 300000;
+		    }
 			/* Create background thread, which will be responsible for 
 			 * purging expired items. 
 			 */
@@ -54,7 +63,6 @@ public abstract class CacheManager {
 				/*  The default time the thread should sleep between scans.  The sleep 
 				 *  method takes in a millisecond value so 5000 = 5 Seconds.
 				 */
-				int milliSecondSleepTime = 100;
 
 				public void run() {
 					try {
@@ -70,11 +78,11 @@ public abstract class CacheManager {
 							 * in cache.  These are the unique 
 							 * identifiers  
 							 */
-							java.util.Set keySet = cacheHashMap.keySet();
+							Set <Object> keySet = cacheHashMap.keySet();
 
 							/* An iterator is used to move*/
 							/* through the Keyset */
-							java.util.Iterator keys = keySet.iterator();
+							Iterator <Object> keys = keySet.iterator();
 
 							/* Sets up a loop that will iterate through each 
 							 * key in the KeySet 
@@ -115,7 +123,7 @@ public abstract class CacheManager {
 							/* Puts the thread to sleep.
 								  Don't need to check it
 								  continuously */
-							Thread.sleep(this.milliSecondSleepTime);
+							Thread.sleep(milliSecondSweepTime);
 						}
 					}
 					catch (Exception e) {
@@ -127,7 +135,7 @@ public abstract class CacheManager {
 			/* End class definition and close new thread definition */
 
 			// Sets the thread's priority to the minimum value.
-			threadCleanerUpper.setPriority(Thread.MAX_PRIORITY);
+			threadCleanerUpper.setPriority(Thread.MIN_PRIORITY);
 
 			// Starts the thread.
 			threadCleanerUpper.start();

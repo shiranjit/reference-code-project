@@ -23,7 +23,6 @@
  */
 package com.shirish.caching.expiringCache;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
