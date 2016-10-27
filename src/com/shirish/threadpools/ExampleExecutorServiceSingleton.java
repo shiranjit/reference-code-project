@@ -50,7 +50,7 @@ public enum ExampleExecutorServiceSingleton {
      */
     ExampleExecutorServiceSingleton() {
         BlockingQueue <Runnable> workQueue = new LinkedBlockingQueue <Runnable>();
-        tpe = new ThreadPoolExecutor( 20, 20, 2, TimeUnit.MINUTES, workQueue );
+        tpe = new ThreadPoolExecutor( 1, 1, 1, TimeUnit.MINUTES, workQueue );
         tpe.prestartCoreThread();
     }
 

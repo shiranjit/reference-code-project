@@ -48,6 +48,8 @@ public class ExampleRunnable implements Runnable {
     public void run() {
         
         try {
+            System.out.println( "Started Running runnable: " + name );
+            
             long sleeptime = (new Double( 1000 * Math.random() + 1000)).longValue();
             System.out.println( "Running runnable: " + name  + " time: " + sleeptime);
             

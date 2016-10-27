@@ -4,6 +4,7 @@
 package com.shirish.csv.dao;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.List;
 
 import com.shirish.csv.common.CSVReader;
@@ -43,17 +44,34 @@ public abstract class AbstractCSVReaderDAO<T>{
      * @throws CSVReaderException
      */
     public List <T> getData() throws CSVReaderException {
-        
-        //lets open the file
-        this.abstractReader = new CSVReader( this.cSVReaderConfig.getCsvFileNameWithFullPath(), this.cSVReaderConfig.getCharSet() );
-        BufferedReader buffRead = this.abstractReader.defaultCSVReader();
+        BufferedReader buffRead=null;
+        try {
+            //lets open the file
+            this.abstractReader = new CSVReader( this.cSVReaderConfig.getCsvFileNameWithFullPath(), this.cSVReaderConfig.getCharSet() );
+            buffRead = this.abstractReader.defaultCSVReader();
 
-        //initialzie the voa and visitor
-        initVOAVisitor();
-        initVisitableVOA( buffRead );
-        this.abstractVisitableVOA.accept( this.avisitor );
+            //initialzie the voa and visitor
+            initVOAVisitor();
+            initVisitableVOA( buffRead );
+            this.abstractVisitableVOA.accept( this.avisitor );
 
-        return this.abstractVisitableVOA.getVOList();
+            return this.abstractVisitableVOA.getVOList();
+        }
+        catch ( Exception e ) {
+            //e.printStackTrace();
+            throw new CSVReaderException(e);
+        }
+        finally{
+            if(null!=buffRead){
+                try {
+                    buffRead.close();
+                }
+                catch ( IOException e ) {
+                    //e.printStackTrace();
+                    //TODO: Please log here
+                }
+            }
+        }
     }
 
 
