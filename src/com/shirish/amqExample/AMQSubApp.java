@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 package com.shirish.amqExample;
 
+import org.apache.log4j.BasicConfigurator;
 
 /**
  * @author shirish
@@ -43,6 +44,7 @@ public class AMQSubApp {
      * @param args
      */
     public static void main( String[] args ) {
+    	BasicConfigurator.configure();
 
         AMQSubscriber sub = null;
         try {
@@ -54,6 +56,11 @@ public class AMQSubApp {
         catch ( Exception e ) {
             e.printStackTrace();
             sub.shutdown();
+        }
+        finally{
+        	if(sub!=null){
+        		sub.shutdown();
+        	}
         }
     }
 

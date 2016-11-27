@@ -30,7 +30,6 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 import com.shirish.amqExample.encoding.EncodeXmlClass;
-import com.shirish.amqExample.encoding.EncodingTypes;
 import com.shirish.amqExample.encoding.TestMarshallHelper;
 
 

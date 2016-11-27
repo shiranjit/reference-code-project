@@ -75,13 +75,13 @@ public class AMQPublisher {
             session = connection.createSession( false, Session.AUTO_ACKNOWLEDGE );
 
             // Create the destination (Topic or Queue)
-            Destination destination = session.createQueue( AMQConstants.QueueName );
+            Destination destination = session.createTopic( AMQConstants.QueueName );
 
             // Create a MessageProducer from the Session to the Topic or Queue
             MessageProducer producer = session.createProducer( destination );
-            producer.setDeliveryMode( DeliveryMode.NON_PERSISTENT );
+            producer.setDeliveryMode( DeliveryMode.PERSISTENT );
 
-            for ( int i = 0; i < 100; i++ ) {
+            for ( int i = 0; i < 10000; i++ ) {
                 String xmldata = testMarshall( EncodingTypes.UTF8.getType(), Integer.valueOf( i ) );
                 // Create a messages
                 //String text = "Hello world! From: " + Thread.currentThread().getName() + " : " + i;

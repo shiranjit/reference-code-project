@@ -43,15 +43,16 @@ public class AMQPubApp {
      */
     public static void main( String[] args ) {
 
-        AMQPublisher sub = null;
+        AMQPublisher pub = null;
         try {
-            sub = new AMQPublisher();
-            sub.helloWorldProducer(JMSMsgType.TextMsgType);
+            pub = new AMQPublisher();
+            pub.helloWorldProducer(JMSMsgType.TextMsgType);
 
         }
         catch ( Exception e ) {
             e.printStackTrace();
         }
+        
     }
 
 }

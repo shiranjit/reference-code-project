@@ -26,10 +26,10 @@ THE SOFTWARE.
 package com.shirish.amqExample;
 
 import javax.jms.Connection;
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.Session;
+import javax.jms.Topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -62,6 +62,7 @@ public class AMQSubscriber {
 
             // Create a Connection
             Connection connection = connectionFactory.createConnection(AMQConstants.username,AMQConstants.passwd);
+            connection.setClientID("shirish");
             connection.start();
 
             connection.setExceptionListener( new AMQExpListener() );
@@ -70,10 +71,10 @@ public class AMQSubscriber {
             Session session = connection.createSession( false, Session.AUTO_ACKNOWLEDGE );
 
             // Create the destination (Topic or Queue)
-            Destination destination = session.createQueue( AMQConstants.QueueName );
+            Topic destination = session.createTopic( AMQConstants.QueueName );
 
             // Create a MessageConsumer from the Session to the Topic or Queue
-            MessageConsumer consumer = session.createConsumer( destination );
+            MessageConsumer consumer = session.createDurableSubscriber(destination, "shirish" );
             consumer.setMessageListener( new AMQMessageListener() );
 
             //            // Wait for a message
