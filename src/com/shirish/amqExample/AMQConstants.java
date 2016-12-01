@@ -32,7 +32,7 @@ package com.shirish.amqExample;
  */
 public final class AMQConstants {
 
-    public static final String QueueName = "Test.Shirish";
+    public static final String QueueName = "Test.ranjit";
     public static final String HostURL   = "tcp://localhost:61616";//"tcp://52.4.205.121:61616";
     public static final String username  = "smx";
     public static final String passwd    = "smx";
