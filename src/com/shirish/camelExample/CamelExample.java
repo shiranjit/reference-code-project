@@ -6,6 +6,7 @@ package com.shirish.camelExample;
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -40,19 +41,30 @@ public class CamelExample {
 
 			// connect to embedded ActiveMQ JMS broker
 			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(AMQConstants.HostURL);
-			context.addComponent("testjms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-
+			context.addComponent("testJMS", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+			
+			//ActiveMQComponent activemqcomp = new ActiveMQComponent();
+			//activemqcomp.setConnectionFactory(connectionFactory);
+			//context.addComponent("testJMS",activemqcomp);
+			//&consumer.prefetchSize=50
+			//destination.consumer.prefetchSize=1
+			//acknowledgementModeName=AUTO_ACKNOWLEDGE
+			//concurrentConsumers=2&
 			// add our route to the CamelContext
 			context.addRoutes(new RouteBuilder() {
 				@Override
 				public void configure() {
 
 					// content-based router
-					from("testjms:topic:" + AMQConstants.QueueName).process(new Processor() {
-						public void process(Exchange exchange) throws Exception {
-							System.out.println("Received XML order: " + exchange.getIn().getMandatoryBody());
-						}
-					});
+					from("testJMS:" + AMQConstants.MQQueue + AMQConstants.VMQueueName
+							+ "?concurrentConsumers=2")//destination.consumer.prefetchSize=10")
+									.process(new Processor() {
+										public void process(Exchange exchange) throws Exception {
+											System.out.println(
+													"Received XML order: " + exchange.getIn().getMandatoryBody());
+											Thread.sleep(1000);
+										}
+									});
 
 				}
 			});
