@@ -72,6 +72,8 @@ public class AMQMessageListener implements MessageListener {
                         System.out.println( " Un-marshalling successful and Data is ----- " );
                         System.out.println( xmlClass.toString() );
                     }
+                    
+                    Thread.sleep(500);
                 }
                 catch ( Exception e ) {
                     e.printStackTrace();

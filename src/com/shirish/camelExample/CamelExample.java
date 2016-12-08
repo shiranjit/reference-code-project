@@ -44,7 +44,11 @@ public class CamelExample {
 			//context.addComponent(AMQConstants.MQQueue, JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 			
 			ActiveMQComponent activemqcomp =  ActiveMQComponent.activeMQComponent(AMQConstants.HostURL);
-			context.addComponent(AMQConstants.MQQueue,activemqcomp);
+			JMSConfigBuilder jmsconfig = new JMSConfigBuilder();
+			activemqcomp.setConfiguration(jmsconfig.getJmsConfiguration());
+			context.addComponent("testJMS",activemqcomp);
+			
+			
 			//&consumer.prefetchSize=50
 			//destination.consumer.prefetchSize=1
 			//acknowledgementModeName=AUTO_ACKNOWLEDGE
@@ -55,8 +59,8 @@ public class CamelExample {
 				public void configure() {
 
 					// content-based router
-					from(AMQConstants.MQQueue +":" + AMQConstants.VMQueueName
-							+ "?concurrentConsumers=2&destination.consumer.prefetchSize=10")
+					from("testJMS:"+AMQConstants.MQQueue +":" + AMQConstants.VMQueueName
+							+"?concurrentConsumers=10")//+"&consumer.prefetchSize=10")
 									.process(new Processor() {
 										public void process(Exchange exchange) throws Exception {
 											System.out.println(

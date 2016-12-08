@@ -25,15 +25,17 @@ THE SOFTWARE.
 
 package com.shirish.amqExample;
 
-
 /**
  * @author shirish
  *
  */
 public final class AMQConstants {
 
-    public static final String QueueName = "Test.ranjit";
-    public static final String HostURL   = "tcp://localhost:61616";//"tcp://52.4.205.121:61616";
-    public static final String username  = "smx";
-    public static final String passwd    = "smx";
+	public static final String QueueName = "Test.ranjit";
+	public static final String HostURL = "tcp://localhost:61616";// "tcp://52.4.205.121:61616";
+	public static final String HostVMURL = "vm://localhost:61616";
+	public static final String username = "smx";
+	public static final String passwd = "smx";
+	public static final String MQQueue = "activemq";
+	public static final String VMQueueName = "queue:Consumer.1.VirtualTopic.Test_ISSUE";
 }

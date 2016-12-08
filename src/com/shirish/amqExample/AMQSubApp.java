@@ -46,9 +46,10 @@ public class AMQSubApp {
     public static void main( String[] args ) {
     	BasicConfigurator.configure();
 
-    	AMQPooledSubscriber sub = null;
+    	//AMQPooledSubscriber sub = null;
+    	AMQQueueSubscriber sub =null;
         try {
-            sub = new AMQPooledSubscriber();
+            sub = new AMQQueueSubscriber();
             sub.helloWorldConsumer();
 
             Thread.sleep( Integer.MAX_VALUE );
