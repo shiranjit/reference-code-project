@@ -75,7 +75,7 @@ public class AMQPublisher {
             session = connection.createSession( false, Session.AUTO_ACKNOWLEDGE );
 
             // Create the destination (Topic or Queue)
-            Destination destination = session.createQueue( AMQConstants.MQQueue +":" + AMQConstants.VMQueueName );
+            Destination destination = session.createQueue(  AMQConstants.VMQueueName );
 
             // Create a MessageProducer from the Session to the Topic or Queue
             MessageProducer producer = session.createProducer( destination );
@@ -92,7 +92,7 @@ public class AMQPublisher {
                 System.out.println( "Sent message: " + message.hashCode() + " : " + Thread.currentThread().getName() + " i: " + i );
                 producer.send( message );
 
-                Thread.sleep( 10 );
+                //Thread.sleep( 10 );
             }
 
         }

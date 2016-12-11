@@ -37,5 +37,5 @@ public final class AMQConstants {
 	public static final String username = "smx";
 	public static final String passwd = "smx";
 	public static final String MQQueue = "activemq";
-	public static final String VMQueueName = "queue:Consumer.1.VirtualTopic.Test_ISSUE";
+	public static final String VMQueueName = "foo";//"Consumer.1.VirtualTopic.Test_ISSUE";
 }
