@@ -36,12 +36,22 @@ public class CamelRouteBuildeEx extends RouteBuilder {
 	public void configure() throws Exception {
 
 		from(AMQConstants.MQQueue +":" + AMQConstants.VMQueueName
-				+"?concurrentConsumers=1")//&destination.consumer.prefetchSize=10")
+				+"?concurrentConsumers=2")//&destination.consumer.prefetchSize=10")
 						.process(new Processor() {
 							public void process(Exchange exchange) throws Exception {
-								System.out.println(
-										"Received XML order: " + exchange.getIn().getMandatoryBody());
-								Thread.sleep(1000);
+								
+								try {
+									System.out.println(ThreadCounterSingleton.getInstance().add());
+									System.out.println(
+											"Received XML order: " + exchange.getIn().getMandatoryBody());
+									Thread.sleep(5000);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								finally{
+									System.out.println(ThreadCounterSingleton.getInstance().sub());
+								}
 							}
 						});
 
