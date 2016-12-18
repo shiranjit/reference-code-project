@@ -6,7 +6,7 @@ package com.shirish.camelExample;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.util.jndi.JndiContext;
+import org.apache.camel.impl.SimpleRegistry;
 import org.apache.log4j.BasicConfigurator;
 
 import com.shirish.amqExample.AMQConstants;
@@ -30,10 +30,10 @@ public class CamelQueueRouteBeanExample {
 
 		try {
 			BasicConfigurator.configure();
-			JndiContext jndiContext = new JndiContext();
-			jndiContext.bind("msgProcessor", new MsgProcessor());
+			SimpleRegistry jndiContext = new SimpleRegistry();
+			jndiContext.put("msgProcessor", new MsgProcessor());
 			// create CamelContext
-			CamelContext context = new DefaultCamelContext();
+			CamelContext context = new DefaultCamelContext(jndiContext);
 
 			// connect to embedded ActiveMQ JMS broker
 			// ConnectionFactory connectionFactory = new
