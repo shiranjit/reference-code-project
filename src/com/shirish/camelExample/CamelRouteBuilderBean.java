@@ -38,7 +38,7 @@ public class CamelRouteBuilderBean extends RouteBuilder {
 	public void configure() throws Exception {
 
 		try {
-			from(AMQConstants.MQQueue + ":" + AMQConstants.VMQueueName + "?concurrentConsumers=2")// &destination.consumer.prefetchSize=10")
+			from(AMQConstants.MQQueue + ":" + AMQConstants.VMQueueName + "?concurrentConsumers=3000")// &destination.consumer.prefetchSize=10")
 					.to("bean:msgProcessor?method=process");
 
 		} catch (Throwable t) {

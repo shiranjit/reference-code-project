@@ -81,7 +81,7 @@ public class AMQPublisher {
             MessageProducer producer = session.createProducer( destination );
             producer.setDeliveryMode( DeliveryMode.PERSISTENT );
 
-            for ( int i = 0; i < 10000; i++ ) {
+            for ( int i = 0; i < 100000; i++ ) {
                 String xmldata = testMarshall( EncodingTypes.UTF8.getType(), Integer.valueOf( i ) );
                 // Create a messages
                 //String text = "Hello world! From: " + Thread.currentThread().getName() + " : " + i;

@@ -26,7 +26,7 @@ public class MsgProcessor {
 		try {
 			System.out.println(ThreadCounterSingleton.getInstance().add());
 			System.out.println("Received XML order: " + exchange.getIn().getMandatoryBody());
-			Thread.sleep(5000);
+			Thread.sleep(200);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

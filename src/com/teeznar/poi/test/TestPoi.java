@@ -32,7 +32,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+//import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 /**
  * 
@@ -54,8 +54,8 @@ public class TestPoi {
         
 	    //InputStream inp = new FileInputStream("workbook.xlsx");
 
-	    Workbook wb = WorkbookFactory.create(inp);
-	    Sheet sheet = wb.getSheetAt(0);
+//	    Workbook wb = WorkbookFactory.create(inp);
+	    Sheet sheet=null; //wb.getSheetAt(0);
 	    
 	    for(Row arow : sheet ){
 	    	
