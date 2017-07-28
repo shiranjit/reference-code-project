@@ -14,11 +14,32 @@
 	<classpathentry kind="lib" path="lib/log4j-1.2-api-2.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-api-2.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-core-2.4.1.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-slf4j-impl-2.4.1.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-to-slf4j-2.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/management-api-1.1-rev-1.jar"/>
 	<classpathentry kind="lib" path="lib/pdfbox-app-2.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.7.12.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-ext-1.7.12.jar"/>
+	<classpathentry kind="lib" path="lib/activemq-camel-5.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/activemq-jms-pool-5.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/activemq-pool-5.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.15.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-core-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-amqp-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-jms-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-jmx-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-batch-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-boot-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-boot-starter-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-integration-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-javaconfig-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-ldap-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-redis-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-security-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/camel-spring-ws-2.17.3.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/spring-beans-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/spring-context-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/spring-core-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/spring-jms-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/camel-lib/spring-tx-4.3.4.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

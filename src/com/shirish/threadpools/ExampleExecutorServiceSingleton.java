@@ -102,7 +102,24 @@ public enum ExampleExecutorServiceSingleton {
         if ( tpe.getQueue().size() <= 0 ) {
             System.out.println( "All the taks complete, the queue is empty" );
             tpe.shutdown();
-            System.exit( 0 );
+           // System.exit( 0 );
+        }
+    }
+    
+    /**
+     * 
+     * 
+     * void
+     */
+    public boolean isDone() {
+
+        if ( tpe.getQueue().size() <= 0 ) {
+            System.out.println( "All the taks complete, the queue is empty" );
+            tpe.shutdown();
+            return true;
+        }
+        else {
+        	return false;
         }
     }
 }
