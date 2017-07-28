@@ -26,7 +26,8 @@
 
 package com.shirish.caching.expiringCache;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 
@@ -37,7 +38,7 @@ import org.apache.log4j.Logger;
  */
 public class GenericCacheManager extends CacheManager {
 
-    private static Logger              LOG                  = Logger.getLogger( GenericCacheManager.class );
+    private static Logger              LOG                  = LogManager.getLogger( GenericCacheManager.class );
 
     //lets expire the cache in  milliseconds
     private static int                 millisecondsToLive = 240;

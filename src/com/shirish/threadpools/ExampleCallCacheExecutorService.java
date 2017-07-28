@@ -29,6 +29,8 @@
 package com.shirish.threadpools;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author shirish
@@ -37,6 +39,7 @@ import org.apache.commons.lang3.RandomStringUtils;
  */
 public class ExampleCallCacheExecutorService {
 
+	private Logger logger = LogManager.getLogger(ExampleCallCacheExecutorService.class);
     /**
      * 
      */
@@ -44,15 +47,16 @@ public class ExampleCallCacheExecutorService {
 
     }
 
-    public void startExample() {
+    public void startExample(int numrun) {
 
 //        BlockingQueue <Runnable> workQueue = new LinkedBlockingQueue <Runnable>();
 //        ThreadPoolExecutor tpe = new ThreadPoolExecutor( 20, 20, 2, TimeUnit.MINUTES, workQueue );
 //        tpe.prestartCoreThread();
         
+    	logger.info(", Starting the run, "+numrun);
         ExampleExecutorServiceSingleton tpe = ExampleExecutorServiceSingleton.getInstance();
 
-        for ( int i = 0; i < 1000; i++ ) {
+        for ( int i = 0; i < numrun; i++ ) {
             
         	String key = "key-"+i;
         	String indata = RandomStringUtils.randomAlphanumeric(250);
@@ -62,6 +66,7 @@ public class ExampleCallCacheExecutorService {
         }
 
         System.out.println( "Lets check what is going on" );
+        //logger.info("before... going to loop");
         
         while ( !tpe.isDone() ) {
 

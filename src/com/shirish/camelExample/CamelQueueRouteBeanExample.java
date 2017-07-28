@@ -7,7 +7,6 @@ import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.SimpleRegistry;
-import org.apache.log4j.BasicConfigurator;
 
 import com.shirish.amqExample.AMQConstants;
 
@@ -29,7 +28,7 @@ public class CamelQueueRouteBeanExample {
 	public static void main(String[] args) {
 
 		try {
-			BasicConfigurator.configure();
+			//BasicConfigurator.configure();
 			SimpleRegistry jndiContext = new SimpleRegistry();
 			jndiContext.put("msgProcessor", new MsgProcessor());
 			// create CamelContext

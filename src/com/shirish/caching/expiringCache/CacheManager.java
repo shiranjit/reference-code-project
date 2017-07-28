@@ -29,7 +29,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *  
@@ -39,7 +40,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public abstract class CacheManager {
-    private static Logger LOGGER = Logger.getLogger(CacheManager.class);
+    private static Logger LOGGER = LogManager.getLogger(CacheManager.class);
 	private static int milliSecondSweepTime = 300000;
 	/* This is the HashMap that contains all objects in the cache. */
 	private Map <Object, Cacheable> cacheHashMap = Collections.synchronizedMap(new HashMap <Object, Cacheable>());

@@ -27,8 +27,8 @@ package com.shirish.threadpools;
 
 import java.lang.management.ManagementFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.shirish.appMonitor.common.stopwatch.ApStopwatch;
 import com.shirish.caching.example.HashMessageCache;
@@ -39,7 +39,7 @@ import com.shirish.caching.example.HashMessageCache;
  *
  */
 public class ExampleCallCacheRunnable implements Runnable {
-	Log logger = LogFactory.getLog(ExampleCallCacheRunnable.class);
+	private Logger logger = LogManager.getLogger(ExampleCallCacheRunnable.class);
 
 	private final String name;
 	private final String indata;
@@ -63,6 +63,7 @@ public class ExampleCallCacheRunnable implements Runnable {
 	public void run() {
 
 		try {
+			logger.trace("start");
 			com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean) ManagementFactory
 					.getOperatingSystemMXBean();
 			double cpusload = os.getProcessCpuLoad();
@@ -71,14 +72,16 @@ public class ExampleCallCacheRunnable implements Runnable {
 			sw.start();
 
 			boolean ispublish = HashMessageCache.getInstance().find(key, indata);
-			// System.out.println("ispublsh:" +ispublish);
+			logger.trace("ispublsh:" +ispublish);
 			sw.stop();
 
 			double cpusloadafter = os.getProcessCpuLoad();
 			double sysloadafter = os.getSystemCpuLoad();
 
-			logger.info(" took: " + sw.toString() + " CPU Process Start: " + cpusload + " CPU system Start: "
-					+ sysload + " CPU Process after: " + cpusloadafter  + " CPU Sys after: " + sysloadafter);
+			logger.info(", took, " + sw.toString() + ", CPU Process Start, " + cpusload + ", CPU system Start, "
+					+ sysload + ", CPU Process after, " + cpusloadafter  + ", CPU Sys after, " + sysloadafter);
+			
+			//logger.trace("end");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -122,7 +122,7 @@ public final class ApStopwatch {
 
         if ( value <= million * thousand ) {
             result.append( toValue()/million );
-            result.append( " ms" );
+            result.append( " ,ms" );
 
         }
         else {
@@ -132,14 +132,14 @@ public final class ApStopwatch {
             if ( seconds <= 60 ) {
 
                 result.append( seconds );
-                result.append( " sec" );
+                result.append( " ,sec" );
             }
             else {
 
                 double minutes = fastRoundDouble( seconds / 60, 2 );
 
                 result.append( minutes );
-                result.append( " min" );
+                result.append( " ,min" );
 
             }
         }

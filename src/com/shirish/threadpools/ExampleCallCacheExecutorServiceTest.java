@@ -25,9 +25,8 @@ THE SOFTWARE.
  */
 package com.shirish.threadpools;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-import org.apache.log4j.BasicConfigurator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -36,7 +35,6 @@ import org.junit.Test;
 
 import com.shirish.appMonitor.common.stopwatch.ApStopwatch;
 
-
 /**
  * @author shirish
  * @Feb 28, 2016
@@ -44,64 +42,87 @@ import com.shirish.appMonitor.common.stopwatch.ApStopwatch;
  */
 public class ExampleCallCacheExecutorServiceTest {
 
-    private ExampleCallCacheExecutorService ees;
-    /**
-     * 
-     * @throws java.lang.Exception
-     * void
-     */
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
+	private ExampleCallCacheExecutorService ees;
 
-    }
+	/**
+	 * 
+	 * @throws java.lang.Exception
+	 *             void
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 
-    /**
-     * 
-     * @throws java.lang.Exception
-     * void
-     */
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
+	}
 
-    }
+	/**
+	 * 
+	 * @throws java.lang.Exception
+	 *             void
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 
-    /**
-     * 
-     * @throws java.lang.Exception
-     * void
-     */
-    @Before
-    public void setUp() throws Exception {
-        ees = new ExampleCallCacheExecutorService();
-        BasicConfigurator.configure();
-    }
+	}
 
-    /**
-     * 
-     * @throws java.lang.Exception
-     * void
-     */
-    @After
-    public void tearDown() throws Exception {
+	/**
+	 * 
+	 * @throws java.lang.Exception
+	 *             void
+	 */
+	@Before
+	public void setUp() throws Exception {
+		ees = new ExampleCallCacheExecutorService();
+		}
 
-    }
+	/**
+	 * 
+	 * @throws java.lang.Exception
+	 *             void
+	 */
+	@After
+	public void tearDown() throws Exception {
 
-    @Test
-    public void test() {
+	}
 
-        try {
-        	ApStopwatch sw = new ApStopwatch(this.getClass(), "test");
-            sw.start();
-        	ees.startExample();
-            sw.stop();
-            System.out.println(sw.toString());
-        }
-        catch ( Exception e ) {
-            e.printStackTrace();
-            fail( "Not yet implemented" );
-            
-        }
-        
-    }
+	@Test
+	public void test() {
+
+		try {
+			Thread.sleep(30000);
+			ApStopwatch sw = new ApStopwatch(this.getClass(), "test");
+			sw.start();
+			ees.startExample(91000);
+			Thread.sleep(2000);
+			
+//			ees.startExample(1000);
+//			Thread.sleep(2000);
+//			
+//			ees.startExample(7000);
+//			Thread.sleep(2000);
+//			
+//			ees.startExample(14000);
+//			Thread.sleep(2000);
+//			
+//			ees.startExample(30000);
+//			Thread.sleep(2000);
+//			
+//			ees.startExample(60000);
+//			Thread.sleep(2000);
+//			
+//			ees.startExample(140000);
+//			Thread.sleep(2000);
+			
+			sw.stop();
+			System.out.println(sw.toString());
+			
+			Thread.sleep(2000);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Not yet implemented");
+
+		}
+
+	}
 
 }

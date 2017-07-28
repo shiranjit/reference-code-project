@@ -12,7 +12,6 @@ import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.log4j.BasicConfigurator;
 
 import com.shirish.amqExample.AMQConstants;
 
@@ -34,7 +33,7 @@ public class CamelTopicExample {
 	public static void main(String[] args) {
 
 		try {
-			BasicConfigurator.configure();
+			//BasicConfigurator.configure();
 			// create CamelContext
 			CamelContext context = new DefaultCamelContext();
 

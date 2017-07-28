@@ -5,11 +5,7 @@ package com.shirish.camelExample;
 
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.log4j.BasicConfigurator;
 
 import com.shirish.amqExample.AMQConstants;
 
@@ -31,7 +27,7 @@ public class CamelQueueExample {
 	public static void main(String[] args) {
 
 		try {
-			BasicConfigurator.configure();
+			//BasicConfigurator.configure();
 			// create CamelContext
 			CamelContext context = new DefaultCamelContext();
 
