@@ -88,10 +88,10 @@ public class ExampleCallCacheExecutorServiceTest {
 	public void test() {
 
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(1000);
 			ApStopwatch sw = new ApStopwatch(this.getClass(), "test");
 			sw.start();
-			ees.startExample(91000);
+			ees.startExample(1000000);
 			Thread.sleep(2000);
 			
 //			ees.startExample(1000);

@@ -109,5 +109,9 @@ public enum HashMessageCache {
 		return isDataSame;
 
 	}
+	
+	public void update(String key, String indata) {
+		messageMap.put(key, indata);
+	}
 
 }
